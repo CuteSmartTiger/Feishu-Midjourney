@@ -5,8 +5,8 @@ ENV GO111MODULE=on \
     GOPROXY=https://goproxy.cn,direct
 
 WORKDIR /build
-ADD ../midjourney /build
-ADD ../midjourney/config.example.yaml /build/config.yaml
+ADD /midjourney /build
+ADD /midjourney/config.example.yaml /build/config.yaml
 
 RUN CGO_ENABLED=0 GOOS=linux go build -ldflags '-w -s' -o discord_midjourney
 
