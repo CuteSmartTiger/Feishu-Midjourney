@@ -2,11 +2,16 @@ FROM golang:1.18 as golang
 
 ENV GO111MODULE=on \
     CGO_ENABLED=1 \
-    GOPROXY=https://goproxy.cn,direct
+    GOPROXY=https://goproxy.cn,https://goproxy.io,direct
+
+ADD go.mod .
+ADD go.sum .
+RUN go mod download
 
 WORKDIR /build
-ADD /lark /build
-ADD /lark/config.example.yaml /build/config.yaml
+
+COPY . /build
+ADD config.example.yaml /build/config.yaml
 
 RUN CGO_ENABLED=0 GOOS=linux go build -ldflags '-w -s' -o lark_midjourney
 
