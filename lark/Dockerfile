@@ -4,10 +4,6 @@ ENV GO111MODULE=on \
     CGO_ENABLED=1 \
     GOPROXY=https://goproxy.cn,https://goproxy.io,direct
 
-ADD go.mod .
-ADD go.sum .
-RUN go mod download
-
 WORKDIR /build
 
 COPY . /build
